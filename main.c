@@ -13,7 +13,7 @@ my_pthread_mutex_t mutex;
  * @return 	null
  */
 void busyWait(int i) {
-	int j = 214740000;
+	int j = 6789450;
 	i = i < 0 ? 1 : i;
 	while (i>=0) {
 		while (j>=0) {j--;}
@@ -32,7 +32,6 @@ void *thread1function(void *arg) {
     int i;
     for(i = 0; i < 10; i++){
         busyWait(1);
-        printf("This is the first Thread 1\n");
      }
     my_pthread_mutex_unlock(&mutex);
     printf("Thread  1 unlocked the mutex\n");
@@ -55,7 +54,7 @@ void *thread2function(void *arg) {
     my_pthread_mutex_unlock(&mutex);
     printf("Thread  2 unlocked the mutex\n");
     printf("Thread  2 EXITING!!!!!!!!\n");
-    my_pthread_exit(NULL);
+//     my_pthread_exit(NULL);
 }
 
 /***
@@ -65,6 +64,7 @@ void *thread2function(void *arg) {
  */
 void *thread3function(void *arg) {
     // my_pthread_mutex_lock(&mutex);
+	printf("Thread 3 started!\n");
     int i;
     long j;
     for(i = 0; i < 2 ; i++) {
@@ -78,6 +78,7 @@ void *thread3function(void *arg) {
     }
     // printf("Thread  3 is done!\n");
     // my_pthread_mutex_unlock(&mutex);
+	printf("Thread  3 is done!\n");
 }
 /***
  * *thread4function- Function for thread 4. This is the function that is executed when thread 4 is scheduled.
