@@ -18,7 +18,7 @@ pthread_mutex_t mutex;
  * @return 	null
  */
 void busyWait(int i) {
-	int j = 2147400;
+	int j = 6789450;
 	i = i < 0 ? 1 : i;
 	while (i>=0) {
 		while (j>=0) {j--;}
@@ -88,7 +88,9 @@ printf("Thread 3 started!\n");
  * @return 	null
  */
 void *thread4function(void *arg) {
-	
+	printf("Thread  4 trying to lock the mutex now\n");
+	pthread_mutex_lock(&mutex);
+	printf("Thread  4 sucessfully locked the mutex!!\n");
     printf("Thread 4 started!\n");
     int i;
     for(i = 0; i < 4 ; i++) {
@@ -97,7 +99,7 @@ void *thread4function(void *arg) {
     }
     pthread_mutex_unlock(&mutex);
     
-	printf("Thread  4 is done!\n");
+	printf("Thread  4 unlocked the mutex\n");
 }
 
 int main(int argc, const char * argv[]) {
@@ -116,9 +118,9 @@ int main(int argc, const char * argv[]) {
     pthread_create(&thread3, NULL, &thread3function,NULL);
     pthread_create(&thread4, NULL, &thread4function,NULL);
     //Call join on the threads
-    pthread_join(thread1,NULL);
-    pthread_join(thread2,NULL);
-    pthread_join(thread3,NULL);
+//     pthread_join(thread1,NULL);
+//     pthread_join(thread2,NULL);
+//     pthread_join(thread3,NULL);
     pthread_join(thread4,NULL);
     //Destroying the mutex
     pthread_mutex_destroy(&mutex);
